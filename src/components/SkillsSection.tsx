@@ -165,7 +165,7 @@ export const shibamMishra: StudentProfile = {
   email: "shivammishra9279523588@gmail.com",
   degree: "Bachelor of Computer Applications (BCA)",
   college: "SAM College of Engineering & Technology, Bhopal",
-  graduationYear: 2026,
+  graduationYear: 2027,
   skills: ["Java OOP", "SQL Databases", "JavaScript", "React", "Tailwind CSS"]
 };`
   };

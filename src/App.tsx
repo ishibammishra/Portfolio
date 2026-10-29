@@ -100,7 +100,7 @@ export function App() {
                 SHIBAM MISHRA // PORTFOLIO
               </div>
               <div className="font-mono text-xs text-gray-400">
-                BCA SAM COLLEGE BHOPAL • JSR NATIVE • 2026 COHORT
+                BCA SAM COLLEGE BHOPAL • JSR NATIVE • 2024–2027 COHORT
               </div>
             </div>
           </div>

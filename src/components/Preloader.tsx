@@ -59,7 +59,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onFinish, onComplete }) =>
             
             {/* Tag */}
             <div className="inline-block px-3 py-1 rounded-full border border-white/30 bg-white/10 text-xs font-mono tracking-wider uppercase">
-              Shibam Mishra • BCA '26 • Portfolio
+              Shibam Mishra • BCA '27 • Portfolio
             </div>
 
             {/* Main Name */}
@@ -69,7 +69,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onFinish, onComplete }) =>
 
             {/* Simple human subtitle */}
             <p className="font-handwriting text-xl sm:text-2xl text-blue-100 max-w-md mx-auto leading-relaxed">
-              "BCA Final Year • Software Developer & Web Engineer"
+              "BCA 2024–2027 • Software Developer & Web Engineer"
             </p>
 
             {/* Progress Bar */}

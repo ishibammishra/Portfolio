@@ -70,7 +70,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ soundEnabled, onOpenRe
             <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#EAE3D2] border-2 border-[#060D1A] shadow-[3px_3px_0px_#060D1A]">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
               <span className="font-mono text-xs font-bold tracking-wider uppercase text-[#060D1A]">
-                BCA 3RD YEAR • OPEN FOR ROLES
+                BCA 2024–2027 • OPEN FOR ROLES
               </span>
             </div>
 
@@ -113,7 +113,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ soundEnabled, onOpenRe
 
           {/* Strong Web & Software Bio */}
           <p className="font-sans text-base sm:text-lg text-[#060D1A]/85 max-w-xl leading-relaxed">
-            Hi, I’m <strong className="font-bold text-[#060D1A]">Shibam Mishra</strong>. I am a final-year BCA student at SAM College (Barkatullah University, Bhopal) specializing in building fast, responsive web applications, Java backend systems, and relational databases. Having mentored 100+ dance performers earlier in Jamshedpur, I bring high discipline, calm problem-solving, and team sync to modern software development.
+            Hi, I’m <strong className="font-bold text-[#060D1A]">Shibam Mishra</strong>. I am a BCA student (2024–2027) at SAM College (Barkatullah University, Bhopal) specializing in building fast, responsive web applications, Java backend systems, and relational databases. Having mentored 100+ dance performers earlier in Jamshedpur, I bring high discipline, calm problem-solving, and team sync to modern software development.
           </p>
 
           <p className="font-mono text-xs sm:text-sm text-[#060D1A]/70 max-w-lg border-l-2 border-[#012CEB] pl-3 py-1">
@@ -161,7 +161,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ soundEnabled, onOpenRe
             </div>
             <div className="bg-[#EAE3D2]/70 p-2 sm:p-2.5 border border-[#060D1A] shadow-[2px_2px_0px_#060D1A]">
               <div className="font-bebas text-xl sm:text-2xl text-[#060D1A]">SAM COLL.</div>
-              <div className="font-mono text-[9px] sm:text-[10px] uppercase font-bold text-[#060D1A]/70 truncate">BCA 2023–2026</div>
+              <div className="font-mono text-[9px] sm:text-[10px] uppercase font-bold text-[#060D1A]/70 truncate">BCA 2024–2027</div>
             </div>
             <div className="bg-[#EAE3D2]/70 p-2 sm:p-2.5 border border-[#060D1A] shadow-[2px_2px_0px_#060D1A]">
               <div className="font-bebas text-xl sm:text-2xl text-emerald-700">JAVA + SQL</div>
@@ -197,7 +197,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ soundEnabled, onOpenRe
             <div className="border-b-2 border-dashed border-[#060D1A] pb-3 sm:pb-4 mb-3 sm:mb-4">
               <div className="flex items-center justify-between text-xs font-mono font-bold text-[#060D1A]/60">
                 <span>ACADEMIC PROFILE</span>
-                <span>2023 — 2026</span>
+                <span>2024 — 2027</span>
               </div>
               <div className="flex items-baseline justify-between mt-2">
                 <div>
@@ -289,7 +289,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ soundEnabled, onOpenRe
               </div>
 
               <div className="text-center font-mono text-[9px] text-[#060D1A]/60 mt-1">
-                SHIBAM MISHRA • SAM COLLEGE OF ENGINEERING & TECH (2023-2026)
+                SHIBAM MISHRA • SAM COLLEGE OF ENGINEERING & TECH (2024-2027)
               </div>
             </div>
           </motion.div>

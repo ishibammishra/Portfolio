@@ -15,7 +15,7 @@ export const ScrollingLogoTicker: React.FC<ScrollingLogoTickerProps> = ({ soundE
     { name: 'TAILWIND CSS', category: 'MODERN STYLING', icon: '🎨', tag: 'RESPONSIVE UI' },
     { name: 'HTML5 & CSS3', category: 'SEMANTIC WEB', icon: '🌐', tag: 'MODERN STANDARDS' },
     { name: 'GIT & GITHUB', category: 'VERSION CONTROL', icon: '🐙', tag: 'COMMITS & REPOS' },
-    { name: 'SAM COLLEGE BHOPAL', category: 'BCA 2023–2026', icon: '🎓', tag: 'FINAL YEAR COHORT' },
+    { name: 'SAM COLLEGE BHOPAL', category: 'BCA 2024–2027', icon: '🎓', tag: '2024–2027 COHORT' },
     { name: 'BARKATULLAH UNIV.', category: 'AFFILIATION', icon: '🏛️', tag: 'STATE UNIVERSITY' },
     { name: 'JAC JAMSHEDPUR', category: 'CLASS X & XII', icon: '🎒', tag: 'BOARD CREDENTIALS' },
     { name: '100+ DANCE STUDENTS', category: 'STAGE MENTORSHIP', icon: '🕺', tag: 'LEADERSHIP & FOCUS' },

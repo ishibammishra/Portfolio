@@ -2,7 +2,7 @@
 
 A high-performance, modern, brutalist-inspired interactive personal developer portfolio built with **React 18**, **TypeScript**, **Tailwind CSS**, and **Framer Motion**.
 
-Designed and crafted for **Shibam Mishra** (BCA 2023–2026, SAM College of Engineering & Technology, Barkatullah University, Bhopal).
+Designed and crafted for **Shibam Mishra** (BCA 2024–2027, SAM College of Engineering & Technology, Barkatullah University, Bhopal).
 
 ---
 
@@ -65,7 +65,7 @@ The output will be placed in the `dist/` directory, ready for deployment on Verc
 ## 📬 Contact & Connect
 
 - **Name**: Shibam Mishra
-- **Degree**: Bachelor of Computer Applications (BCA, 2023–2026)
+- **Degree**: Bachelor of Computer Applications (BCA, 2024–2027)
 - **University**: Barkatullah University, Bhopal (SAM College of Engineering & Technology)
 - **LinkedIn**: [linkedin.com/in/shibam-mishra-08a73242b](https://www.linkedin.com/in/shibam-mishra-08a73242b/)
 - **Phone**: +91 9279523588

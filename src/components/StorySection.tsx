@@ -50,11 +50,11 @@ export const StorySection: React.FC<StorySectionProps> = ({ soundEnabled }) => {
 
   const education = [
     {
-      year: "2023 — 2026",
+      year: "2024 — 2027",
       degree: "BACHELOR OF COMPUTER APPLICATIONS (BCA)",
       institution: "SAM College of Engineering & Technology",
       affiliate: "Barkatullah University, Bhopal (M.P.)",
-      status: "CURRENT • 3RD YEAR FINAL YEAR",
+      status: "CURRENT • BCA 2024–2027 COHORT",
       badge: "COLLEGE",
       highlights: "Studying Core Java, Object-Oriented Programming (OOP), Database Management Systems (SQL), Operating Systems, and Web Technologies."
     },

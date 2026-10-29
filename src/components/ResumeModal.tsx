@@ -114,7 +114,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose, sound
                 <div className="bg-white/80 p-3 border border-[#060D1A]">
                   <div className="flex justify-between items-start font-mono text-xs">
                     <strong>BACHELOR OF COMPUTER APPLICATIONS (BCA)</strong>
-                    <span className="text-[#012CEB] font-bold">2023 – 2026</span>
+                    <span className="text-[#012CEB] font-bold">2024 – 2027</span>
                   </div>
                   <div className="text-[#060D1A]/70 text-[11px] mb-1">
                     SAM College of Engineering & Technology (Barkatullah University, Bhopal)
@@ -225,7 +225,7 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose, sound
 
           {/* Modal Footer */}
           <div className="mt-8 pt-4 border-t-2 border-[#060D1A] flex justify-between items-center font-mono text-xs">
-            <span className="text-[#060D1A]/60">VERIFIED OFFICIAL RESUME // 2026</span>
+            <span className="text-[#060D1A]/60">VERIFIED OFFICIAL RESUME // 2024–2027</span>
             <button
               onClick={() => {
                 playClickSound('snap', soundEnabled);
