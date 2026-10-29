@@ -49,7 +49,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F6F2E9] text-[#060D1A] selection:bg-[#012CEB] selection:text-white font-sans antialiased relative">
+    <div className="min-h-screen w-full max-w-full overflow-x-clip bg-[#F6F2E9] text-[#060D1A] selection:bg-[#012CEB] selection:text-white font-sans antialiased relative">
       {/* 10-Ball Spring Physics Trailing Cursor */}
       <PhysicsCursor />
 
@@ -67,7 +67,7 @@ export function App() {
       />
 
       {/* Main Content Stream */}
-      <main className="relative z-10">
+      <main className="relative z-10 w-full max-w-full overflow-x-clip">
         <HeroSection
           soundEnabled={soundEnabled}
           onOpenResume={() => setIsResumeOpen(true)}

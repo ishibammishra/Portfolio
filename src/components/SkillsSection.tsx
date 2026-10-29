@@ -186,7 +186,7 @@ export const shibamMishra: StudentProfile = {
           <Code2 className="w-3.5 h-3.5" />
           TECHNICAL SKILLS
         </div>
-        <h2 className="font-bebas text-5xl sm:text-6xl md:text-7xl text-[#060D1A] leading-tight">
+        <h2 className="font-bebas text-3xl xs:text-4xl sm:text-6xl md:text-7xl text-[#060D1A] leading-tight break-words">
           WHAT I WORK WITH &<br />
           <span className="text-[#012CEB]">REAL SAMPLE CODE.</span>
         </h2>
@@ -253,81 +253,86 @@ export const shibamMishra: StudentProfile = {
       {/* Code Viewer */}
       <div className="bg-[#060D1A] border-3 sm:border-4 border-[#060D1A] text-[#F6F2E9] shadow-[5px_5px_0px_#012CEB] sm:shadow-[10px_10px_0px_#012CEB]">
         {/* Terminal Header */}
-        <div className="bg-[#0e172a] px-4 py-3 border-b-2 border-[#060D1A] flex flex-wrap items-center justify-between gap-3">
+        <div className="bg-[#0e172a] px-3 sm:px-4 py-2.5 sm:py-3 border-b-2 border-[#060D1A] flex flex-wrap items-center justify-between gap-2 sm:gap-3">
           <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1.5 mr-3">
-              <span className="w-3 h-3 rounded-full bg-red-500 inline-block" />
-              <span className="w-3 h-3 rounded-full bg-amber-500 inline-block" />
-              <span className="w-3 h-3 rounded-full bg-emerald-500 inline-block" />
+            <div className="flex items-center gap-1.5 mr-2 sm:mr-3">
+              <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500 inline-block" />
+              <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-500 inline-block" />
+              <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-500 inline-block" />
             </div>
-            <TerminalIcon className="w-4 h-4 text-[#012CEB]" />
-            <span className="font-mono text-xs font-bold text-gray-300">
+            <TerminalIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#012CEB]" />
+            <span className="font-mono text-[11px] sm:text-xs font-bold text-gray-300">
               shibam@bca-sam:~/projects
             </span>
           </div>
 
-          {/* Tab Selector */}
-          <div className="flex items-center gap-1 bg-[#060D1A] p-1 border border-white/20">
-            <button
-              onClick={() => {
-                setActiveTab('java');
-                playClickSound('snap', soundEnabled);
-              }}
-              className={`px-3 py-1 font-mono text-xs font-bold uppercase transition-colors ${
-                activeTab === 'java'
-                  ? 'bg-[#012CEB] text-white'
-                  : 'text-gray-400 hover:text-white'
-              }`}
-            >
-              StudentResult.java
-            </button>
+          <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
+            {/* Tab Selector */}
+            <div className="flex items-center gap-1 bg-[#060D1A] p-0.5 sm:p-1 border border-white/20 overflow-x-auto no-scrollbar">
+              <button
+                onClick={() => {
+                  setActiveTab('java');
+                  playClickSound('snap', soundEnabled);
+                }}
+                className={`px-2 sm:px-3 py-1 font-mono text-[10px] sm:text-xs font-bold uppercase transition-colors shrink-0 ${
+                  activeTab === 'java'
+                    ? 'bg-[#012CEB] text-white'
+                    : 'text-gray-400 hover:text-white'
+                }`}
+              >
+                <span className="sm:hidden">Java</span>
+                <span className="hidden sm:inline">StudentResult.java</span>
+              </button>
 
-            <button
-              onClick={() => {
-                setActiveTab('sql');
-                playClickSound('snap', soundEnabled);
-              }}
-              className={`px-3 py-1 font-mono text-xs font-bold uppercase transition-colors ${
-                activeTab === 'sql'
-                  ? 'bg-[#012CEB] text-white'
-                  : 'text-gray-400 hover:text-white'
-              }`}
-            >
-              schema.sql
-            </button>
+              <button
+                onClick={() => {
+                  setActiveTab('sql');
+                  playClickSound('snap', soundEnabled);
+                }}
+                className={`px-2 sm:px-3 py-1 font-mono text-[10px] sm:text-xs font-bold uppercase transition-colors shrink-0 ${
+                  activeTab === 'sql'
+                    ? 'bg-[#012CEB] text-white'
+                    : 'text-gray-400 hover:text-white'
+                }`}
+              >
+                <span className="sm:hidden">SQL</span>
+                <span className="hidden sm:inline">schema.sql</span>
+              </button>
 
+              <button
+                onClick={() => {
+                  setActiveTab('ts');
+                  playClickSound('snap', soundEnabled);
+                }}
+                className={`px-2 sm:px-3 py-1 font-mono text-[10px] sm:text-xs font-bold uppercase transition-colors shrink-0 ${
+                  activeTab === 'ts'
+                    ? 'bg-[#012CEB] text-white'
+                    : 'text-gray-400 hover:text-white'
+                }`}
+              >
+                <span className="sm:hidden">TS Config</span>
+                <span className="hidden sm:inline">PortfolioConfig.ts</span>
+              </button>
+            </div>
+
+            {/* Copy Button */}
             <button
-              onClick={() => {
-                setActiveTab('ts');
-                playClickSound('snap', soundEnabled);
-              }}
-              className={`px-3 py-1 font-mono text-xs font-bold uppercase transition-colors ${
-                activeTab === 'ts'
-                  ? 'bg-[#012CEB] text-white'
-                  : 'text-gray-400 hover:text-white'
-              }`}
+              onClick={handleCopyCode}
+              className="flex items-center gap-1 px-2.5 sm:px-3 py-1 border border-white/20 bg-white/5 hover:bg-white/15 text-[10px] sm:text-xs font-mono font-bold text-gray-200 transition-colors shrink-0"
             >
-              PortfolioConfig.ts
+              {copied ? (
+                <>
+                  <Check className="w-3 h-3 text-emerald-400" />
+                  <span className="text-emerald-400">COPIED</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-3 h-3" />
+                  <span>COPY</span>
+                </>
+              )}
             </button>
           </div>
-
-          {/* Copy Button */}
-          <button
-            onClick={handleCopyCode}
-            className="flex items-center gap-1.5 px-3 py-1 border border-white/20 bg-white/5 hover:bg-white/15 text-xs font-mono font-bold text-gray-200 transition-colors"
-          >
-            {copied ? (
-              <>
-                <Check className="w-3.5 h-3.5 text-emerald-400" />
-                <span className="text-emerald-400">COPIED</span>
-              </>
-            ) : (
-              <>
-                <Copy className="w-3.5 h-3.5" />
-                <span>COPY CODE</span>
-              </>
-            )}
-          </button>
         </div>
 
         {/* Code Content */}
@@ -347,14 +352,14 @@ export const shibamMishra: StudentProfile = {
         </div>
 
         {/* Status Bar */}
-        <div className="bg-[#0b1329] px-4 py-2 border-t border-white/10 flex items-center justify-between text-[11px] font-mono text-gray-400">
-          <div className="flex items-center gap-3">
-            <span className="text-emerald-400 font-bold">● COMPILED SUCCESSFULLY</span>
+        <div className="bg-[#0b1329] px-3 sm:px-4 py-2 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-[10px] sm:text-[11px] font-mono text-gray-400">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <span className="text-emerald-400 font-bold">● COMPILED</span>
             <span>UTF-8</span>
           </div>
           <div className="flex items-center gap-2 text-gray-300">
-            <span className="px-2 py-0.5 bg-white/10 rounded text-[10px] text-amber-200">☕ 0 Bugs (Almost)</span>
-            <span>Shibam Mishra • SAM College Bhopal</span>
+            <span className="px-1.5 py-0.5 bg-white/10 rounded text-[9px] text-amber-200">☕ 0 Bugs</span>
+            <span className="hidden sm:inline">Shibam Mishra • SAM College Bhopal</span>
           </div>
         </div>
       </div>

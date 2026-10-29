@@ -49,26 +49,26 @@ export const Preloader: React.FC<PreloaderProps> = ({ onFinish, onComplete }) =>
           exit={{ y: '-100%', opacity: 0.95 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           onClick={dismiss}
-          className="fixed inset-0 z-50 bg-[#012CEB] text-white flex flex-col items-center justify-center p-6 select-none cursor-pointer overflow-hidden"
+          className="fixed inset-0 z-50 bg-[#012CEB] text-white flex flex-col items-center justify-center p-4 sm:p-6 select-none cursor-pointer overflow-hidden"
         >
           {/* Subtle blueprint grid */}
           <div className="absolute inset-0 bg-blueprint-grid opacity-25 pointer-events-none" />
 
           {/* Centered Content */}
-          <div className="relative z-10 max-w-lg w-full text-center space-y-6">
+          <div className="relative z-10 max-w-lg w-full text-center space-y-4 sm:space-y-6 px-2">
             
             {/* Tag */}
-            <div className="inline-block px-3 py-1 rounded-full border border-white/30 bg-white/10 text-xs font-mono tracking-wider uppercase">
+            <div className="inline-block px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full border border-white/30 bg-white/10 text-[9px] xs:text-[10px] sm:text-xs font-mono tracking-wider uppercase max-w-[92vw] truncate">
               Shibam Mishra • BCA '27 • Portfolio
             </div>
 
             {/* Main Name */}
-            <h1 className="font-bebas text-6xl sm:text-8xl tracking-wider leading-none">
+            <h1 className="font-bebas text-3xl xs:text-4xl sm:text-7xl lg:text-8xl tracking-wide sm:tracking-wider leading-none break-words px-1">
               SHIBAM MISHRA
             </h1>
 
             {/* Simple human subtitle */}
-            <p className="font-handwriting text-xl sm:text-2xl text-blue-100 max-w-md mx-auto leading-relaxed">
+            <p className="font-handwriting text-xs xs:text-sm sm:text-xl md:text-2xl text-blue-100 max-w-md mx-auto leading-relaxed px-2">
               "BCA 2024–2027 • Software Developer & Web Engineer"
             </p>
 

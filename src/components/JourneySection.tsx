@@ -252,31 +252,31 @@ export const JourneySection: React.FC<JourneySectionProps> = ({ soundEnabled = t
       <div className="absolute inset-0 bg-grid-paper opacity-30 pointer-events-none" />
 
       {/* Sticky Frame: Pinned firmly under navbar during scroll through stations 01 to 05 */}
-      <div className="sticky top-14 h-[calc(100vh-3.5rem)] flex flex-col justify-center py-2 sm:py-4 px-2.5 sm:px-6 max-w-6xl mx-auto overflow-hidden">
+      <div className="sticky top-14 h-[calc(100vh-3.5rem)] max-h-[calc(100dvh-3.5rem)] flex flex-col justify-center py-1.5 sm:py-4 px-2 sm:px-6 max-w-6xl mx-auto overflow-y-auto no-scrollbar">
         
         {/* Top Header */}
-        <div className="border-b-2 border-[#060D1A] pb-2 sm:pb-3 mb-2 sm:mb-3">
+        <div className="border-b-2 border-[#060D1A] pb-1.5 sm:pb-3 mb-1.5 sm:mb-3">
           <div className="flex items-center justify-between flex-wrap gap-1.5 sm:gap-2 mb-1">
             
-            <div className="flex items-center gap-1.5 sm:gap-2">
-              <span className="px-1.5 sm:px-2 py-0.5 bg-[#060D1A] text-white font-mono text-[10px] sm:text-[11px] font-bold tracking-wider rounded-sm">
+            <div className="flex items-center gap-1 sm:gap-2">
+              <span className="px-1.5 sm:px-2 py-0.5 bg-[#060D1A] text-white font-mono text-[9px] xs:text-[10px] sm:text-[11px] font-bold tracking-wider rounded-sm">
                 01 ➔ 05
               </span>
-              <span className="font-mono text-[11px] sm:text-xs text-[#060D1A]/80 uppercase tracking-widest font-black">
-                PINNED CAREER ROUTE
+              <span className="font-mono text-[10px] sm:text-xs text-[#060D1A]/80 uppercase tracking-widest font-black">
+                CAREER ROUTE
               </span>
 
               {/* Cute Badge */}
-              <span className="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 bg-amber-100 border border-[#060D1A] font-mono text-[9px] sm:text-[10px] font-bold text-[#060D1A] rotate-[-2deg] shadow-sm">
+              <span className="inline-flex items-center gap-1 px-1.5 sm:px-2 py-0.5 bg-amber-100 border border-[#060D1A] font-mono text-[8px] sm:text-[10px] font-bold text-[#060D1A] rotate-[-2deg] shadow-sm">
                 <span>{activeStation.cuteIcon}</span>
                 <span>{activeStation.cuteTag}</span>
               </span>
             </div>
 
             {/* Live Station & Scroll Hint */}
-            <div className="flex items-center gap-2 font-mono text-[11px] sm:text-xs">
+            <div className="flex items-center gap-2 font-mono text-[10px] sm:text-xs">
               <div className="bg-white px-2 py-0.5 sm:px-2.5 sm:py-1 border-2 border-[#060D1A] font-bold flex items-center gap-1.5 shadow-[2px_2px_0px_#060D1A]">
-                <span className="w-2 h-2 rounded-full bg-[#012CEB] animate-ping" />
+                <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#012CEB] animate-ping" />
                 <span>CURRENT: <strong className="text-[#012CEB] font-black">{activeStation.number} <span className="hidden sm:inline">{activeStation.name}</span><span className="sm:hidden">{activeStation.shortName || activeStation.name}</span></strong></span>
               </div>
 
@@ -289,7 +289,7 @@ export const JourneySection: React.FC<JourneySectionProps> = ({ soundEnabled = t
           </div>
 
           <div className="flex items-baseline justify-between">
-            <h2 className="font-bebas text-2xl sm:text-3xl lg:text-4xl text-[#060D1A] leading-none">
+            <h2 className="font-bebas text-xl xs:text-2xl sm:text-3xl lg:text-4xl text-[#060D1A] leading-none">
               FROM JAMSHEDPUR TO THE TECH FRONTIER
             </h2>
             <div className="hidden md:block font-mono text-[10px] text-[#060D1A]/60 font-bold">

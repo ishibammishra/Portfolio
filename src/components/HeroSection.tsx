@@ -54,48 +54,48 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ soundEnabled, onOpenRe
   };
 
   return (
-    <section id="hero" className="relative pt-24 pb-16 md:pt-32 md:pb-24 px-4 sm:px-6 max-w-7xl mx-auto overflow-hidden">
+    <section id="hero" className="relative pt-20 pb-12 sm:pt-28 sm:pb-20 md:pt-32 md:pb-24 px-3 sm:px-6 max-w-7xl mx-auto overflow-hidden">
       {/* Background watermark */}
-      <div className="absolute right-0 top-10 pointer-events-none opacity-5 select-none font-bebas text-[200px] leading-none text-[#060D1A] z-0">
+      <div className="absolute right-0 top-10 pointer-events-none opacity-5 select-none font-bebas text-[90px] xs:text-[130px] sm:text-[180px] md:text-[200px] leading-none text-[#060D1A] z-0 overflow-hidden max-w-full">
         MISHRA
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
         
         {/* Left Column (7 cols) */}
-        <div className="lg:col-span-7 space-y-6">
+        <div className="lg:col-span-7 space-y-5 sm:space-y-6">
           
           {/* Status badge & Tech Stickers Row */}
-          <div className="flex flex-wrap items-center gap-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#EAE3D2] border-2 border-[#060D1A] shadow-[3px_3px_0px_#060D1A]">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="font-mono text-xs font-bold tracking-wider uppercase text-[#060D1A]">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+            <div className="inline-flex items-center gap-1.5 px-2 sm:px-2.5 py-1 bg-[#EAE3D2] border-2 border-[#060D1A] shadow-[2px_2px_0px_#060D1A]">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="font-mono text-[9px] xs:text-[10px] sm:text-xs font-bold tracking-wider uppercase text-[#060D1A]">
                 BCA 2024–2027 • OPEN FOR ROLES
               </span>
             </div>
 
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-blue-100 border border-[#060D1A] font-mono text-[11px] font-bold text-[#060D1A] rotate-[-2deg] shadow-[2px_2px_0px_#060D1A]">
+            <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-blue-100 border border-[#060D1A] font-mono text-[9px] xs:text-[10px] sm:text-[11px] font-bold text-[#060D1A] rotate-[-2deg] shadow-[2px_2px_0px_#060D1A]">
               <span>💻</span>
-              <span>Full-Stack & Web Dev</span>
+              <span>Full-Stack & Web</span>
             </div>
 
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-amber-100 border border-[#060D1A] font-mono text-[11px] font-bold text-[#060D1A] shadow-[2px_2px_0px_#060D1A]">
+            <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-amber-100 border border-[#060D1A] font-mono text-[9px] xs:text-[10px] sm:text-[11px] font-bold text-[#060D1A] shadow-[2px_2px_0px_#060D1A]">
               <span>☕</span>
               <span>Chai & Code</span>
             </div>
 
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-pink-100 border border-[#060D1A] font-mono text-[11px] font-bold text-[#060D1A] rotate-[2deg] shadow-[2px_2px_0px_#060D1A]">
+            <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-pink-100 border border-[#060D1A] font-mono text-[9px] xs:text-[10px] sm:text-[11px] font-bold text-[#060D1A] rotate-[2deg] shadow-[2px_2px_0px_#060D1A]">
               <span>🕺</span>
               <span>Ex-Dance Coach</span>
             </div>
           </div>
 
-          {/* Headline - Web & Software First */}
+          {/* Headline - Scaled Proportionately Across All Phones */}
           <div className="relative">
-            <h1 className="font-bebas text-5xl sm:text-6xl lg:text-7xl tracking-tight text-[#060D1A] leading-[0.92]">
+            <h1 className="font-bebas text-[2.1rem] xs:text-4xl sm:text-6xl lg:text-7xl tracking-tight text-[#060D1A] leading-[0.98] max-w-full break-words">
               SOFTWARE DEVELOPER
               <br />
-              <span className="text-[#012CEB] underline decoration-4 underline-offset-8">
+              <span className="text-[#012CEB] underline decoration-3 sm:decoration-4 underline-offset-4 sm:underline-offset-8">
                 & WEB ENGINEER.
               </span>
             </h1>
@@ -105,73 +105,75 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ soundEnabled, onOpenRe
               initial={{ rotate: -8, opacity: 0 }}
               animate={{ rotate: -4, opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="absolute -top-3 right-0 sm:right-16 bg-amber-200 border border-[#060D1A] px-2.5 py-1 text-xs font-handwriting text-[#060D1A] shadow-[2px_2px_0px_#060D1A] hidden sm:block"
+              className="absolute -top-3 right-0 sm:right-16 bg-amber-200 border border-[#060D1A] px-2 py-0.5 sm:px-2.5 sm:py-1 text-[11px] sm:text-xs font-handwriting text-[#060D1A] shadow-[2px_2px_0px_#060D1A] hidden sm:block"
             >
               (You can call me Shivam!)
             </motion.div>
           </div>
 
           {/* Strong Web & Software Bio */}
-          <p className="font-sans text-base sm:text-lg text-[#060D1A]/85 max-w-xl leading-relaxed">
+          <p className="font-sans text-sm sm:text-base md:text-lg text-[#060D1A]/85 max-w-xl leading-relaxed">
             Hi, I’m <strong className="font-bold text-[#060D1A]">Shibam Mishra</strong>. I am a BCA student (2024–2027) at SAM College (Barkatullah University, Bhopal) specializing in building fast, responsive web applications, Java backend systems, and relational databases. Having mentored 100+ dance performers earlier in Jamshedpur, I bring high discipline, calm problem-solving, and team sync to modern software development.
           </p>
 
-          <p className="font-mono text-xs sm:text-sm text-[#060D1A]/70 max-w-lg border-l-2 border-[#012CEB] pl-3 py-1">
+          <p className="font-mono text-[11px] sm:text-xs md:text-sm text-[#060D1A]/70 max-w-lg border-l-2 border-[#012CEB] pl-2.5 sm:pl-3 py-1">
             Core Arsenal: <strong className="text-[#060D1A]">React, TypeScript & Tailwind</strong>, <strong className="text-[#060D1A]">Java (OOP & Collections)</strong>, and <strong className="text-[#060D1A]">MySQL Database</strong>.
           </p>
 
           {/* Action Buttons */}
-          <div className="flex flex-wrap items-center gap-3 pt-2">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-2 sm:gap-3 pt-2">
             <button
               onClick={() => scrollTo('projects')}
-              className="px-6 py-3 bg-[#012CEB] text-white border-2 border-[#060D1A] font-mono text-sm font-bold uppercase tracking-wider shadow-[4px_4px_0px_#060D1A] hover:bg-[#060D1A] active:translate-x-0.5 active:translate-y-0.5 transition-all flex items-center gap-2 group"
+              className="w-full sm:w-auto px-5 sm:px-6 py-2.5 sm:py-3 bg-[#012CEB] text-white border-2 border-[#060D1A] font-mono text-xs sm:text-sm font-bold uppercase tracking-wider shadow-[3px_3px_0px_#060D1A] sm:shadow-[4px_4px_0px_#060D1A] hover:bg-[#060D1A] active:translate-x-0.5 active:translate-y-0.5 transition-all flex items-center justify-center gap-2 group"
             >
               <span>VIEW WEB & CODE PROJECTS</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
 
-            <button
-              onClick={() => {
-                playClickSound('modal', soundEnabled);
-                onOpenResume();
-              }}
-              className="px-5 py-3 bg-[#F6F2E9] hover:bg-[#EAE3D2] text-[#060D1A] border-2 border-[#060D1A] font-mono text-sm font-bold uppercase tracking-wider shadow-[4px_4px_0px_#060D1A] active:translate-x-0.5 active:translate-y-0.5 transition-all flex items-center gap-2"
-            >
-              <FileText className="w-4 h-4 text-[#012CEB]" />
-              <span>VIEW RESUME</span>
-            </button>
+            <div className="grid grid-cols-2 gap-2 sm:flex sm:items-center">
+              <button
+                onClick={() => {
+                  playClickSound('modal', soundEnabled);
+                  onOpenResume();
+                }}
+                className="px-3 sm:px-5 py-2.5 sm:py-3 bg-[#F6F2E9] hover:bg-[#EAE3D2] text-[#060D1A] border-2 border-[#060D1A] font-mono text-xs sm:text-sm font-bold uppercase tracking-wider shadow-[3px_3px_0px_#060D1A] sm:shadow-[4px_4px_0px_#060D1A] active:translate-x-0.5 active:translate-y-0.5 transition-all flex items-center justify-center gap-1.5"
+              >
+                <FileText className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#012CEB]" />
+                <span>RESUME</span>
+              </button>
 
-            <a
-              href="https://www.linkedin.com/in/shibam-mishra-08a73242b/"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => playClickSound('snap', soundEnabled)}
-              className="px-4 py-3 bg-[#0077B5] hover:bg-[#060D1A] text-white border-2 border-[#060D1A] font-mono text-sm font-bold uppercase tracking-wider shadow-[4px_4px_0px_#060D1A] active:translate-x-0.5 active:translate-y-0.5 transition-all flex items-center gap-1.5"
-            >
-              <LinkedinIcon className="w-4 h-4" />
-              <span>LINKEDIN</span>
-            </a>
+              <a
+                href="https://www.linkedin.com/in/shibam-mishra-08a73242b/"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => playClickSound('snap', soundEnabled)}
+                className="px-3 sm:px-4 py-2.5 sm:py-3 bg-[#0077B5] hover:bg-[#060D1A] text-white border-2 border-[#060D1A] font-mono text-xs sm:text-sm font-bold uppercase tracking-wider shadow-[3px_3px_0px_#060D1A] sm:shadow-[4px_4px_0px_#060D1A] active:translate-x-0.5 active:translate-y-0.5 transition-all flex items-center justify-center gap-1.5"
+              >
+                <LinkedinIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                <span>LINKEDIN</span>
+              </a>
+            </div>
           </div>
 
           {/* 3 Metric Pills - Software Focus */}
-          <div className="grid grid-cols-3 gap-2 sm:gap-3 pt-3 sm:pt-4 border-t-2 border-[#060D1A]/10">
-            <div className="bg-[#EAE3D2]/70 p-2 sm:p-2.5 border border-[#060D1A] shadow-[2px_2px_0px_#060D1A]">
-              <div className="font-bebas text-xl sm:text-2xl text-[#012CEB]">3+ APPS</div>
-              <div className="font-mono text-[9px] sm:text-[10px] uppercase font-bold text-[#060D1A]/70 truncate">Projects Coded</div>
+          <div className="grid grid-cols-3 gap-1.5 xs:gap-2 sm:gap-3 pt-3 sm:pt-4 border-t-2 border-[#060D1A]/10">
+            <div className="bg-[#EAE3D2]/70 p-1.5 xs:p-2 sm:p-2.5 border border-[#060D1A] shadow-[2px_2px_0px_#060D1A]">
+              <div className="font-bebas text-lg xs:text-xl sm:text-2xl text-[#012CEB] leading-none mb-0.5">3+ APPS</div>
+              <div className="font-mono text-[8px] xs:text-[9px] sm:text-[10px] uppercase font-bold text-[#060D1A]/70 truncate">Projects Coded</div>
             </div>
-            <div className="bg-[#EAE3D2]/70 p-2 sm:p-2.5 border border-[#060D1A] shadow-[2px_2px_0px_#060D1A]">
-              <div className="font-bebas text-xl sm:text-2xl text-[#060D1A]">SAM COLL.</div>
-              <div className="font-mono text-[9px] sm:text-[10px] uppercase font-bold text-[#060D1A]/70 truncate">BCA 2024–2027</div>
+            <div className="bg-[#EAE3D2]/70 p-1.5 xs:p-2 sm:p-2.5 border border-[#060D1A] shadow-[2px_2px_0px_#060D1A]">
+              <div className="font-bebas text-lg xs:text-xl sm:text-2xl text-[#060D1A] leading-none mb-0.5">SAM COLL.</div>
+              <div className="font-mono text-[8px] xs:text-[9px] sm:text-[10px] uppercase font-bold text-[#060D1A]/70 truncate">BCA 2024–2027</div>
             </div>
-            <div className="bg-[#EAE3D2]/70 p-2 sm:p-2.5 border border-[#060D1A] shadow-[2px_2px_0px_#060D1A]">
-              <div className="font-bebas text-xl sm:text-2xl text-emerald-700">JAVA + SQL</div>
-              <div className="font-mono text-[9px] sm:text-[10px] uppercase font-bold text-[#060D1A]/70 truncate">Backend Focus</div>
+            <div className="bg-[#EAE3D2]/70 p-1.5 xs:p-2 sm:p-2.5 border border-[#060D1A] shadow-[2px_2px_0px_#060D1A]">
+              <div className="font-bebas text-lg xs:text-xl sm:text-2xl text-emerald-700 leading-none mb-0.5">JAVA + SQL</div>
+              <div className="font-mono text-[8px] xs:text-[9px] sm:text-[10px] uppercase font-bold text-[#060D1A]/70 truncate">Backend Focus</div>
             </div>
           </div>
         </div>
 
         {/* Right Column: Student Card with 3D Tilt (5 cols) */}
-        <div className="lg:col-span-5 flex justify-center">
+        <div className="lg:col-span-5 flex justify-center w-full">
           <motion.div
             ref={cardRef}
             onMouseMove={handleMouseMove}
@@ -181,15 +183,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ soundEnabled, onOpenRe
               rotateY,
               transformStyle: 'preserve-3d',
             }}
-            className="w-full max-w-md bg-[#F6F2E9] border-3 sm:border-4 border-[#060D1A] shadow-[5px_5px_0px_#060D1A] sm:shadow-[10px_10px_0px_#060D1A] p-4 sm:p-6 relative select-none cursor-pointer"
+            className="w-full max-w-md bg-[#F6F2E9] border-3 sm:border-4 border-[#060D1A] shadow-[4px_4px_0px_#060D1A] sm:shadow-[10px_10px_0px_#060D1A] p-3.5 sm:p-6 relative select-none cursor-pointer"
             onClick={() => playClickSound('snap', soundEnabled)}
           >
-            {/* Student ID badge & Cute Tape */}
-            <div className="absolute -top-3.5 -left-3 bg-amber-100 border border-[#060D1A] px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-wider font-bold text-[#060D1A] rotate-[-4deg] shadow-sm">
+            {/* Student ID badge & Cute Tape (Safely positioned inside mobile card boundaries) */}
+            <div className="absolute -top-3 left-1 sm:-left-3 bg-amber-100 border border-[#060D1A] px-2 sm:px-2.5 py-0.5 font-mono text-[8px] sm:text-[9px] uppercase tracking-wider font-bold text-[#060D1A] rotate-[-4deg] shadow-sm">
               📌 Shibam's Desk
             </div>
 
-            <div className="absolute -top-3 -right-3 bg-[#012CEB] text-white px-2.5 sm:px-3 py-0.5 sm:py-1 font-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-wider border-2 border-[#060D1A] rotate-3 shadow-[2px_2px_0px_#060D1A]">
+            <div className="absolute -top-3 right-1 sm:-right-3 bg-[#012CEB] text-white px-2 sm:px-3 py-0.5 sm:py-1 font-mono text-[8px] sm:text-[10px] font-bold uppercase tracking-wider border-2 border-[#060D1A] rotate-3 shadow-[2px_2px_0px_#060D1A]">
               BCA STUDENT ID
             </div>
 

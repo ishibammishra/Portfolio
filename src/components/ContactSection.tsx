@@ -74,7 +74,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ soundEnabled }) 
           <MessageSquare className="w-3.5 h-3.5" />
           GET IN TOUCH
         </div>
-        <h2 className="font-bebas text-5xl sm:text-6xl md:text-7xl text-[#060D1A] leading-tight">
+        <h2 className="font-bebas text-3xl xs:text-4xl sm:text-6xl md:text-7xl text-[#060D1A] leading-tight break-words">
           CONNECT WITH SHIBAM.<br />
           <span className="text-[#012CEB]">READY FOR NEW OPPORTUNITIES.</span>
         </h2>

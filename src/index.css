@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Prevent horizontal page overflow on all mobile devices and aspect ratios without breaking position:sticky */
+html, body {
+  overflow-x: clip;
+  max-width: 100vw;
+  width: 100%;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 7px;

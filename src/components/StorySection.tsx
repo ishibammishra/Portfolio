@@ -87,7 +87,7 @@ export const StorySection: React.FC<StorySectionProps> = ({ soundEnabled }) => {
           <Compass className="w-3.5 h-3.5" />
           MY STORY // DISCIPLINE & CODE
         </div>
-        <h2 className="font-bebas text-5xl sm:text-6xl md:text-7xl text-[#060D1A] leading-tight">
+        <h2 className="font-bebas text-3xl xs:text-4xl sm:text-6xl md:text-7xl text-[#060D1A] leading-tight break-words">
           BUILDING DISCIPLINE<br />
           <span className="text-[#012CEB]">INTO EVERY LINE OF CODE.</span>
         </h2>

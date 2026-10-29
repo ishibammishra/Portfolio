@@ -104,7 +104,7 @@ function filterBatches(selectedStyle) {
           <FolderGit2 className="w-3.5 h-3.5" />
           FEATURED PROJECTS
         </div>
-        <h2 className="font-bebas text-5xl sm:text-6xl md:text-7xl text-[#060D1A] leading-tight">
+        <h2 className="font-bebas text-3xl xs:text-4xl sm:text-6xl md:text-7xl text-[#060D1A] leading-tight break-words">
           PROJECTS I HAVE BUILT &<br />
           <span className="text-[#012CEB]">WHAT THEY DO.</span>
         </h2>
