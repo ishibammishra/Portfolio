@@ -20,26 +20,35 @@ export function App() {
   const [isResumeOpen, setIsResumeOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
-  // Track active section for bottom navigation capsule dock
+  // Track active section for navigation with smooth, throttled scroll spy
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      const sections = ['hero', 'story', 'skills', 'projects', 'journey', 'contact'];
-      const scrollPosition = window.scrollY + 250;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          // Correct visual order of sections in the DOM
+          const sections = ['hero', 'story', 'skills', 'journey', 'projects', 'contact'];
+          const scrollPosition = window.scrollY + 220;
 
-      for (const sectionId of sections) {
-        const el = document.getElementById(sectionId);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(sectionId);
-            break;
+          for (const sectionId of sections) {
+            const el = document.getElementById(sectionId);
+            if (el) {
+              const top = el.offsetTop;
+              const height = el.offsetHeight;
+              if (scrollPosition >= top && scrollPosition < top + height) {
+                setActiveSection(prev => (prev !== sectionId ? sectionId : prev));
+                break;
+              }
+            }
           }
-        }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 

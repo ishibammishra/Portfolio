@@ -160,16 +160,21 @@ interface JourneySectionProps {
 export const JourneySection: React.FC<JourneySectionProps> = ({ soundEnabled = true }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIdx, setActiveIdx] = useState(0); // Starts at Station 01 and advances smoothly to 05
-  const [direction, setDirection] = useState(0);
+  const isScrollingRef = useRef(false);
 
-  // Sticky pinned scroll tracking across 220vh height
+  // Sticky pinned scroll tracking across 240vh height
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end']
   });
 
-  // Update active station based on pinned scroll progress
+  // Silky smooth spring for the track progress line (60fps continuous feedback)
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 220, damping: 28 });
+  const trackWidth = useTransform(smoothProgress, [0, 1], ['0%', '100%']);
+
+  // Update active station based on pinned scroll progress without audio spam or lag
   useEffect(() => {
+    let lastIdx = 0;
     return scrollYProgress.on('change', (latest) => {
       let idx = 0;
       if (latest >= 0.82) idx = 4;
@@ -178,26 +183,20 @@ export const JourneySection: React.FC<JourneySectionProps> = ({ soundEnabled = t
       else if (latest >= 0.16) idx = 1;
       else idx = 0;
 
-      setActiveIdx((prev) => {
-        if (prev !== idx) {
-          setDirection(idx > prev ? 1 : -1);
-          playClickSound(580 + idx * 55, 0.03, soundEnabled);
-          return idx;
-        }
-        return prev;
-      });
+      if (idx !== lastIdx) {
+        lastIdx = idx;
+        setActiveIdx(idx);
+      }
     });
-  }, [scrollYProgress, soundEnabled]);
+  }, [scrollYProgress]);
 
   // Keyboard navigation (Left / Right Arrow Keys)
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight' && activeIdx < stations.length - 1) {
-        setDirection(1);
         playClickSound(650 + (activeIdx + 1) * 40, 0.04, soundEnabled);
         setActiveIdx(prev => prev + 1);
       } else if (e.key === 'ArrowLeft' && activeIdx > 0) {
-        setDirection(-1);
         playClickSound(650 + (activeIdx - 1) * 40, 0.04, soundEnabled);
         setActiveIdx(prev => prev - 1);
       }
@@ -211,7 +210,6 @@ export const JourneySection: React.FC<JourneySectionProps> = ({ soundEnabled = t
   const stationIcons = [GraduationCap, Users, GraduationCap, Code2, Briefcase];
 
   const handleSelectStation = (idx: number) => {
-    setDirection(idx > activeIdx ? 1 : -1);
     playClickSound(600 + idx * 45, 0.04, soundEnabled);
     setActiveIdx(idx);
   };
@@ -246,16 +244,16 @@ export const JourneySection: React.FC<JourneySectionProps> = ({ soundEnabled = t
     <section 
       id="journey" 
       ref={containerRef} 
-      className="relative h-[220vh] bg-[#EAE3D2] border-y-2 border-[#060D1A]"
+      className="relative h-[230vh] bg-[#EAE3D2] border-y-2 border-[#060D1A]"
     >
       {/* Decorative Blueprint Background Grid */}
       <div className="absolute inset-0 bg-grid-paper opacity-30 pointer-events-none" />
 
       {/* Sticky Frame: Pinned firmly under navbar during scroll through stations 01 to 05 */}
-      <div className="sticky top-14 h-[calc(100vh-3.5rem)] max-h-[calc(100dvh-3.5rem)] flex flex-col justify-center py-1.5 sm:py-4 px-2 sm:px-6 max-w-6xl mx-auto overflow-y-auto no-scrollbar">
+      <div className="sticky top-14 h-[calc(100vh-3.5rem)] max-h-[calc(100dvh-3.5rem)] flex flex-col justify-center py-1.5 sm:py-3 px-2 sm:px-6 max-w-6xl mx-auto overflow-hidden">
         
         {/* Top Header */}
-        <div className="border-b-2 border-[#060D1A] pb-1.5 sm:pb-3 mb-1.5 sm:mb-3">
+        <div className="border-b-2 border-[#060D1A] pb-1.5 sm:pb-2.5 mb-1.5 sm:mb-2.5">
           <div className="flex items-center justify-between flex-wrap gap-1.5 sm:gap-2 mb-1">
             
             <div className="flex items-center gap-1 sm:gap-2">
@@ -299,7 +297,7 @@ export const JourneySection: React.FC<JourneySectionProps> = ({ soundEnabled = t
         </div>
 
         {/* 5 Interactive Station Tabs Bar (Phone & Ratio Friendly) */}
-        <div className="grid grid-cols-5 gap-1 sm:gap-2 mb-2 sm:mb-3">
+        <div className="grid grid-cols-5 gap-1 sm:gap-2 mb-1.5 sm:mb-2.5">
           {stations.map((st, idx) => {
             const isActive = activeIdx === idx;
             const Icon = stationIcons[idx];
@@ -307,20 +305,20 @@ export const JourneySection: React.FC<JourneySectionProps> = ({ soundEnabled = t
               <button
                 key={st.id}
                 onClick={() => handleSelectStation(idx)}
-                className={`p-1.5 sm:p-2.5 border-2 border-[#060D1A] text-left transition-all duration-200 relative ${
+                className={`p-1 xs:p-1.5 sm:p-2 border-2 border-[#060D1A] text-left transition-all duration-150 relative ${
                   isActive
                     ? 'bg-[#012CEB] text-white shadow-[2px_2px_0px_#060D1A] sm:shadow-[3px_3px_0px_#060D1A] -translate-y-0.5'
                     : 'bg-[#F6F2E9] text-[#060D1A] hover:bg-white shadow-[1px_1px_0px_#060D1A] sm:shadow-[2px_2px_0px_#060D1A]'
                 }`}
               >
                 <div className="flex items-center justify-between mb-0.5">
-                  <span className={`font-mono text-[10px] sm:text-xs font-black ${isActive ? 'text-white' : 'text-[#012CEB]'}`}>
+                  <span className={`font-mono text-[9px] xs:text-[10px] sm:text-xs font-black ${isActive ? 'text-white' : 'text-[#012CEB]'}`}>
                     {st.number}
                   </span>
                   <Icon className="w-3.5 h-3.5 opacity-80 hidden md:block" />
                 </div>
 
-                <div className="font-bebas text-xs sm:text-base leading-tight truncate">
+                <div className="font-bebas text-[11px] xs:text-xs sm:text-base leading-tight truncate">
                   <span className="sm:hidden">{st.shortName || st.name}</span>
                   <span className="hidden sm:inline">{st.name}</span>
                 </div>
@@ -333,15 +331,14 @@ export const JourneySection: React.FC<JourneySectionProps> = ({ soundEnabled = t
           })}
         </div>
 
-        {/* Clean Kinetic Subway Track (Without spinning compass marker) */}
-        <div className="relative px-2 py-1.5 sm:py-2 mb-2 sm:mb-3">
+        {/* Silky-Smooth Continuous Subway Track */}
+        <div className="relative px-2 py-1 sm:py-1.5 mb-1.5 sm:mb-2.5">
           
-          {/* Base Track */}
+          {/* Base Track with continuous real-time progress */}
           <div className="h-2 bg-white border-2 border-[#060D1A] rounded-full relative overflow-hidden">
             <motion.div
               className="h-full bg-[#012CEB]"
-              style={{ width: `${(activeIdx / 4) * 100}%` }}
-              transition={{ type: 'spring', stiffness: 260, damping: 26 }}
+              style={{ width: trackWidth }}
             />
           </div>
 
@@ -354,7 +351,7 @@ export const JourneySection: React.FC<JourneySectionProps> = ({ soundEnabled = t
                 <button
                   key={st.id}
                   onClick={() => handleSelectStation(idx)}
-                  className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full border-2 border-[#060D1A] flex items-center justify-center font-mono text-[9px] sm:text-[10px] font-black transition-all ${
+                  className={`w-5 h-5 xs:w-6 xs:h-6 sm:w-7 sm:h-7 rounded-full border-2 border-[#060D1A] flex items-center justify-center font-mono text-[8px] xs:text-[9px] sm:text-[10px] font-black transition-all ${
                     isCurrent
                       ? 'bg-[#012CEB] text-white scale-110 shadow-[2px_2px_0px_#060D1A]'
                       : passed
@@ -369,235 +366,165 @@ export const JourneySection: React.FC<JourneySectionProps> = ({ soundEnabled = t
           </div>
         </div>
 
-        {/* Compact, Proportionate Station Card Container (Fixed height & phone friendly) */}
-        <div className="bg-white border-3 sm:border-4 border-[#060D1A] p-3.5 sm:p-5 lg:p-6 shadow-[4px_4px_0px_#060D1A] sm:shadow-[6px_6px_0px_#060D1A] relative">
+        {/* Hardware-Accelerated 60fps Station Card Display (Zero DOM unmounting lag, perfect fit) */}
+        <div className="bg-white border-3 sm:border-4 border-[#060D1A] p-2.5 sm:p-4 lg:p-5 shadow-[4px_4px_0px_#060D1A] sm:shadow-[6px_6px_0px_#060D1A] relative overflow-hidden">
           
-          <AnimatePresence initial={false} custom={direction}>
-            <motion.div
-              key={activeStation.id}
-              custom={direction}
-              initial={{ opacity: 0, x: direction * 15 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: direction * -15 }}
-              transition={{ duration: 0.15, ease: 'easeOut' }}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-5 items-stretch"
-            >
-              
-              {/* Left Content (8 cols) */}
-              <div className="lg:col-span-8 space-y-2 sm:space-y-2.5 flex flex-col justify-between">
-                
-                {/* Header Badges */}
-                <div className="flex flex-wrap items-center gap-1 sm:gap-1.5">
-                  <span className="px-1.5 sm:px-2 py-0.5 bg-[#012CEB] text-white font-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-wider">
-                    {activeStation.badge}
-                  </span>
-                  <span className="px-1.5 sm:px-2 py-0.5 bg-[#EAE3D2] border border-[#060D1A] font-mono text-[9px] sm:text-[10px] text-[#060D1A] font-bold flex items-center gap-1">
-                    <Calendar className="w-3 h-3 text-[#012CEB]" />
-                    {activeStation.period}
-                  </span>
-                  <span className="px-1.5 sm:px-2 py-0.5 bg-[#EAE3D2] border border-[#060D1A] font-mono text-[9px] sm:text-[10px] text-[#060D1A] font-bold flex items-center gap-1">
-                    <MapPin className="w-3 h-3 text-[#012CEB]" />
-                    {activeStation.location}
-                  </span>
-                </div>
+          <div className="relative min-h-[360px] xs:min-h-[340px] sm:min-h-[300px]">
+            {stations.map((st, idx) => {
+              const isCurrent = activeIdx === idx;
+              return (
+                <div 
+                  key={st.id} 
+                  className={`w-full transition-all duration-300 ease-out ${
+                    isCurrent
+                      ? 'opacity-100 translate-y-0 pointer-events-auto relative z-10'
+                      : 'opacity-0 translate-y-2 pointer-events-none absolute inset-0 -z-10'
+                  }`}
+                >
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 sm:gap-4 items-stretch">
+                    
+                    {/* Left Content (8 cols) */}
+                    <div className="lg:col-span-8 space-y-1.5 sm:space-y-2 flex flex-col justify-between">
+                      
+                      {/* Header Badges */}
+                      <div className="flex flex-wrap items-center gap-1 sm:gap-1.5">
+                        <span className="px-1.5 sm:px-2 py-0.5 bg-[#012CEB] text-white font-mono text-[8px] xs:text-[9px] sm:text-[10px] font-bold uppercase tracking-wider">
+                          {st.badge}
+                        </span>
+                        <span className="px-1.5 sm:px-2 py-0.5 bg-[#EAE3D2] border border-[#060D1A] font-mono text-[8px] xs:text-[9px] sm:text-[10px] text-[#060D1A] font-bold flex items-center gap-1">
+                          <Calendar className="w-3 h-3 text-[#012CEB]" />
+                          {st.period}
+                        </span>
+                        <span className="px-1.5 sm:px-2 py-0.5 bg-[#EAE3D2] border border-[#060D1A] font-mono text-[8px] xs:text-[9px] sm:text-[10px] text-[#060D1A] font-bold flex items-center gap-1">
+                          <MapPin className="w-3 h-3 text-[#012CEB]" />
+                          {st.location}
+                        </span>
+                      </div>
 
-                {/* Title */}
-                <h3 className="font-bebas text-2xl sm:text-3xl lg:text-4xl text-[#060D1A] leading-none">
-                  {activeStation.title}
-                </h3>
+                      {/* Title */}
+                      <h3 className="font-bebas text-xl xs:text-2xl sm:text-3xl lg:text-4xl text-[#060D1A] leading-none">
+                        {st.title}
+                      </h3>
 
-                <div className="font-mono text-[11px] sm:text-xs font-bold text-[#012CEB]">
-                  {activeStation.subtitle}
-                </div>
+                      <div className="font-mono text-[10px] xs:text-[11px] sm:text-xs font-bold text-[#012CEB]">
+                        {st.subtitle}
+                      </div>
 
-                <p className="font-sans text-xs sm:text-sm text-[#060D1A]/85 leading-relaxed">
-                  {activeStation.description}
-                </p>
+                      <p className="font-sans text-[11px] xs:text-xs sm:text-sm text-[#060D1A]/85 leading-relaxed line-clamp-3 sm:line-clamp-none">
+                        {st.description}
+                      </p>
 
-                {/* Achievements list */}
-                <div className="space-y-1 pt-1 sm:pt-1.5 border-t border-dashed border-[#060D1A]/20">
-                  {activeStation.bullets.map((point, bIdx) => (
-                    <div key={bIdx} className="flex items-start gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-sans text-[#060D1A]">
-                      <span className="w-3.5 h-3.5 bg-[#012CEB] text-white rounded flex items-center justify-center shrink-0 mt-0.5 text-[8px] font-bold">
-                        ✓
-                      </span>
-                      <span>{point}</span>
+                      {/* Achievements list */}
+                      <div className="space-y-1 pt-1 border-t border-dashed border-[#060D1A]/20">
+                        {st.bullets.map((point, bIdx) => (
+                          <div key={bIdx} className="flex items-start gap-1.5 text-[10px] xs:text-[11px] sm:text-xs font-sans text-[#060D1A]">
+                            <span className="w-3.5 h-3.5 bg-[#012CEB] text-white rounded flex items-center justify-center shrink-0 mt-0.5 text-[8px] font-bold">
+                              ✓
+                            </span>
+                            <span className="line-clamp-2 sm:line-clamp-none">{point}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Station 05 Interactive Radar & Launch Button or General Status */}
+                      {st.id === 4 ? (
+                        <div className="pt-1 flex flex-wrap items-center justify-between gap-1.5 bg-emerald-50 border border-emerald-300 p-1.5 sm:p-2">
+                          <div className="flex items-center gap-1.5">
+                            <span className="relative flex h-2.5 w-2.5">
+                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-600" />
+                            </span>
+                            <span className="font-mono text-[9px] xs:text-[10px] sm:text-[11px] font-bold text-emerald-900">
+                              STATUS: READY FOR SOFTWARE ONBOARDING
+                            </span>
+                          </div>
+
+                          <button
+                            onClick={triggerHireCelebration}
+                            className="px-2 sm:px-3 py-1 bg-[#012CEB] text-white hover:bg-[#060D1A] font-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-wider border border-[#060D1A] flex items-center gap-1 shadow-sm transition-colors"
+                          >
+                            <Send className="w-3 h-3" />
+                            <span>HIRE / CONNECT WITH SHIBAM</span>
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="pt-1 flex items-center gap-1.5 font-mono text-[9px] xs:text-[10px] sm:text-[11px] text-emerald-800 bg-emerald-50 border border-emerald-300 p-1 sm:p-1.5 font-bold">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+                          <span>Verified Academic & Experience Track Record</span>
+                        </div>
+                      )}
+
                     </div>
-                  ))}
-                </div>
 
-                {/* Station 05 Interactive Radar & Launch Button or General Status */}
-                {activeStation.id === 4 ? (
-                  <div className="pt-1.5 flex flex-wrap items-center justify-between gap-2 bg-emerald-50 border border-emerald-300 p-2 sm:p-2.5">
-                    <div className="flex items-center gap-1.5 sm:gap-2">
-                      <span className="relative flex h-2.5 w-2.5 sm:h-3 sm:w-3">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 sm:h-3 sm:w-3 bg-emerald-600" />
-                      </span>
-                      <span className="font-mono text-[10px] sm:text-[11px] font-bold text-emerald-900">
-                        STATUS: READY FOR SOFTWARE ONBOARDING
-                      </span>
+                    {/* Right Stat Card (4 cols) with Responsive Mobile Horizontal Layout */}
+                    <div className="lg:col-span-4 bg-[#EAE3D2] border-2 sm:border-3 border-[#060D1A] p-2 sm:p-3 flex flex-row lg:flex-col justify-between items-center text-left lg:text-center shadow-[2px_2px_0px_#060D1A] gap-2">
+                      
+                      {/* Station Mini-Graphic */}
+                      <div className="hidden lg:flex w-full justify-between items-center font-mono text-[10px] uppercase font-bold text-[#060D1A]/60 pb-1 border-b border-[#060D1A]/20">
+                        <span>KEY HIGHLIGHT</span>
+                        <span className="bg-amber-100 border border-[#060D1A] px-1.5 py-0.2 rounded text-[9px]">
+                          {st.cuteTag}
+                        </span>
+                      </div>
+
+                      {/* Emoji badge */}
+                      <div className="w-9 h-9 sm:w-11 sm:h-11 bg-white border-2 border-[#060D1A] rounded-full flex items-center justify-center text-lg sm:text-2xl shadow-sm shrink-0">
+                        {st.cuteIcon}
+                      </div>
+
+                      {/* Right/Bottom: Stat number */}
+                      <div className="text-right lg:text-center">
+                        <div className="font-bebas text-xl xs:text-2xl sm:text-4xl lg:text-5xl text-[#012CEB] leading-none">
+                          {st.stat}
+                        </div>
+                        <div className="font-mono text-[9px] sm:text-xs font-bold text-[#060D1A]">
+                          {st.statLabel}
+                        </div>
+                      </div>
+
+                      <div className="hidden lg:flex w-full pt-1 border-t border-[#060D1A]/20 justify-between items-center font-mono text-[9px] text-[#060D1A]">
+                        <span className="font-bold">STATION {st.number}</span>
+                        <span className="font-bold text-[#012CEB]">{st.name}</span>
+                      </div>
+
                     </div>
 
-                    <button
-                      onClick={triggerHireCelebration}
-                      className="px-2.5 sm:px-3 py-1 bg-[#012CEB] text-white hover:bg-[#060D1A] font-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-wider border border-[#060D1A] flex items-center gap-1 shadow-sm transition-colors"
-                    >
-                      <Send className="w-3 h-3" />
-                      <span>HIRE / CONNECT WITH SHIBAM</span>
-                    </button>
-                  </div>
-                ) : (
-                  <div className="pt-1 flex items-center gap-2 font-mono text-[10px] sm:text-[11px] text-emerald-800 bg-emerald-50 border border-emerald-300 p-1.5 sm:p-2 font-bold">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
-                    <span>Verified Academic & Experience Track Record</span>
-                  </div>
-                )}
-
-              </div>
-
-              {/* Right Stat Card (4 cols) with Responsive Mobile Horizontal Layout */}
-              <div className="lg:col-span-4 bg-[#EAE3D2] border-2 sm:border-3 border-[#060D1A] p-2.5 sm:p-4 flex flex-row lg:flex-col justify-between items-center text-left lg:text-center shadow-[2px_2px_0px_#060D1A] sm:shadow-[3px_3px_0px_#060D1A] gap-2">
-                
-                {/* Station Animated Mini-Graphic */}
-                <div className="hidden lg:flex w-full justify-between items-center font-mono text-[10px] uppercase font-bold text-[#060D1A]/60 pb-1 border-b border-[#060D1A]/20">
-                  <span>KEY HIGHLIGHT</span>
-                  <span className="bg-amber-100 border border-[#060D1A] px-1.5 py-0.2 rounded text-[9px]">
-                    {activeStation.cuteTag}
-                  </span>
-                </div>
-
-                {/* Animated Graphic based on Station */}
-                <div className="flex items-center lg:flex-col gap-2 lg:gap-0 my-0 lg:my-2">
-                  {activeStation.id === 0 && (
-                    <motion.div 
-                      animate={{ scale: [1, 1.05, 1] }} 
-                      transition={{ duration: 2, repeat: Infinity }}
-                      className="w-10 h-10 sm:w-12 sm:h-12 bg-white border-2 border-[#060D1A] rounded-full flex items-center justify-center text-xl sm:text-2xl shadow-sm shrink-0"
-                    >
-                      📚
-                    </motion.div>
-                  )}
-
-                  {activeStation.id === 1 && (
-                    <div className="flex items-center gap-1 shrink-0">
-                      {[14, 24, 18, 28, 16, 22].map((h, i) => (
-                        <motion.div
-                          key={i}
-                          animate={{ height: [h, h * 0.4, h] }}
-                          transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15 }}
-                          className="w-1.5 bg-[#7C3AED] rounded-full"
-                          style={{ height: `${h}px` }}
-                        />
-                      ))}
-                    </div>
-                  )}
-
-                  {activeStation.id === 2 && (
-                    <motion.div 
-                      animate={{ rotate: [-4, 4, -4] }} 
-                      transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-                      className="w-10 h-10 sm:w-12 sm:h-12 bg-white border-2 border-[#060D1A] rounded-full flex items-center justify-center text-xl sm:text-2xl shadow-sm shrink-0"
-                    >
-                      🎓
-                    </motion.div>
-                  )}
-
-                  {activeStation.id === 3 && (
-                    <div className="bg-[#060D1A] text-emerald-400 font-mono text-[9px] sm:text-[10px] px-2 py-1 border border-gray-600 rounded flex items-center gap-1 shrink-0">
-                      <span className="animate-pulse">●</span>
-                      <span>java Result</span>
-                    </div>
-                  )}
-
-                  {activeStation.id === 4 && (
-                    <div className="relative shrink-0">
-                      <motion.div 
-                        animate={{ y: [-2, 2, -2] }}
-                        transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-                        className="text-2xl sm:text-3xl"
-                      >
-                        🚀
-                      </motion.div>
-                      <motion.div
-                        animate={{ scale: [0.8, 1.3, 0.8], opacity: [0.3, 0.7, 0.3] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                        className="absolute inset-0 bg-[#012CEB] rounded-full blur-md -z-10"
-                      />
-                    </div>
-                  )}
-
-                  <div className="lg:hidden font-mono text-[10px] font-bold text-[#060D1A]">
-                    {activeStation.cuteTag}
                   </div>
                 </div>
-
-                {/* Right/Bottom: Stat number */}
-                <div className="text-right lg:text-center">
-                  <div className="font-bebas text-2xl sm:text-4xl lg:text-5xl text-[#012CEB] leading-none">
-                    {activeStation.stat}
-                  </div>
-                  <div className="font-mono text-[10px] sm:text-xs font-bold text-[#060D1A]">
-                    {activeStation.statLabel}
-                  </div>
-                </div>
-
-                {/* Animated Tech Orbits for Station 05 (desktop only) */}
-                {activeStation.id === 4 ? (
-                  <div className="hidden lg:flex w-full pt-1.5 border-t border-[#060D1A]/20 flex-wrap justify-center gap-1">
-                    {['JAVA', 'SQL', 'REACT', 'TS', 'GIT'].map((tech, tIdx) => (
-                      <motion.span
-                        key={tech}
-                        animate={{ y: [0, -2, 0] }}
-                        transition={{ duration: 1.8, repeat: Infinity, delay: tIdx * 0.2 }}
-                        className="px-1.5 py-0.5 bg-[#060D1A] text-white font-mono text-[8px] font-bold"
-                      >
-                        {tech}
-                      </motion.span>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="hidden lg:flex w-full pt-1.5 border-t border-[#060D1A]/20 justify-between items-center font-mono text-[10px] text-[#060D1A]">
-                    <span className="font-bold">STATION {activeStation.number}</span>
-                    <span className="font-bold text-[#012CEB]">{activeStation.name}</span>
-                  </div>
-                )}
-
-              </div>
-
-            </motion.div>
-          </AnimatePresence>
+              );
+            })}
+          </div>
 
           {/* Bottom Controls Bar */}
-          <div className="flex items-center justify-between pt-2.5 border-t-2 border-[#060D1A] mt-2.5">
+          <div className="flex items-center justify-between pt-2 border-t-2 border-[#060D1A] mt-2">
             
             <button
               onClick={handlePrev}
               disabled={activeIdx === 0}
-              className={`px-3 py-1 border-2 border-[#060D1A] font-mono text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all ${
+              className={`px-2.5 sm:px-3 py-1 border-2 border-[#060D1A] font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-1 transition-all ${
                 activeIdx === 0
                   ? 'opacity-30 cursor-not-allowed bg-gray-200 text-gray-400'
                   : 'bg-[#F6F2E9] text-[#060D1A] hover:bg-[#060D1A] hover:text-white shadow-[2px_2px_0px_#060D1A]'
               }`}
             >
               <ArrowLeft className="w-3.5 h-3.5" />
-              <span>PREV STATION</span>
+              <span>PREV</span>
             </button>
 
-            <div className="font-mono text-[11px] text-[#060D1A]/60 font-bold hidden sm:block">
-              {activeIdx < 4 ? '↓ Keep scrolling down to traverse 01 ➔ 05' : '✓ Journey Completed! Scroll down for Projects'}
+            <div className="font-mono text-[10px] sm:text-[11px] text-[#060D1A]/70 font-bold text-center px-1">
+              {activeIdx < 4 ? '↓ Scroll down to advance stations 01 ➔ 05' : '✓ 05 IT Reached! Keep scrolling for Projects'}
             </div>
 
             <button
               onClick={handleNext}
               disabled={activeIdx === stations.length - 1}
-              className={`px-3 py-1 border-2 border-[#060D1A] font-mono text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 transition-all ${
+              className={`px-2.5 sm:px-3 py-1 border-2 border-[#060D1A] font-mono text-[10px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-1 transition-all ${
                 activeIdx === stations.length - 1
                   ? 'opacity-30 cursor-not-allowed bg-gray-200 text-gray-400'
                   : 'bg-[#012CEB] text-white hover:bg-[#060D1A] shadow-[2px_2px_0px_#060D1A]'
               }`}
             >
-              <span>NEXT STATION</span>
+              <span>NEXT</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
 
